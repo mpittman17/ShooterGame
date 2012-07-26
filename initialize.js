@@ -5,7 +5,7 @@ var canvasWidth;
 var canvasHeight;
 var topCtx;
 var bottomCtx;
-var numberOfBalls = 4;
+var numberOfBalls = 3;
 var correctBall = 2;
 var balls;
 var image = new Image();
@@ -36,9 +36,9 @@ function initialize() {
 	canvasWidth = width;
 	canvasHeight = height;
 
-	touchInitialize();	
 	initializeBalls(numberOfBalls, correctBall);
-	initializeInterface();
+	drawInterface();
+	touchInitialize();	
 
 	path();  
 }
@@ -51,52 +51,15 @@ function initializeBalls(theBalls, theAnswer){
 
 	}
 	//Creates the array of shot balls
-	//shotBalls = new Array(0);
-}
-
-function initializeInterface(){
-
-	bottomCtx.strokeStyle="black";
-	bottomCtx.save();
-	bottomCtx.translate(canvasWidth/2, canvasHeight);
-	bottomCtx.rotate(Math.PI/180 * angle);
-
-	bottomCtx.fillStyle = "black";
-	bottomCtx.beginPath();
-	bottomCtx.moveTo(-100,0);
-	bottomCtx.lineTo(-86,10);
-	bottomCtx.lineTo(-93,0);
-
-	bottomCtx.lineTo(-86,-10);
-	bottomCtx.fill();
-	bottomCtx.moveTo(-100,0);
-	bottomCtx.lineTo(100,0);
-
-	bottomCtx.arc(0, 0, 30, 0, 2*Math.PI, false);
-	bottomCtx.stroke();
-	bottomCtx.fill();
-	bottomCtx.moveTo(100,10);
-	bottomCtx.lineTo(100,-10);
-	bottomCtx.lineTo(-100,0);
-	bottomCtx.fill();
-
-	//Draw outer circle around shooter
-	bottomCtx.moveTo(-100,0);
-	bottomCtx.lineTo(100,0);
-	bottomCtx.arc(0, 0, 100, 0, 2*Math.PI, false);
-	bottomCtx.stroke();
-
-	bottomCtx.restore();		
+	shotBalls = new Array(0);
 }
 
 function ball(){
-	this.radius = .02 * width;
+	this.radius = .025 * width;
 	this.x = (Math.random()*(width-(2*this.radius))+this.radius) << 0;
 	this.y = (Math.random()*(height-(2*this.radius))+this.radius) << 0;
-	this.dx = Math.random()*4;
-	this.dy = Math.sqrt(16-Math.pow(this.dx,2));
-	//this.dx = Math.random();
-	//this.dy = Math.sqrt(1-Math.pow(this.dx,2));
+	this.dx = Math.random()*3;
+	this.dy = Math.sqrt(9-Math.pow(this.dx,2));
 	this.col = "lightblue";
 	this.letter = "A";
 }
